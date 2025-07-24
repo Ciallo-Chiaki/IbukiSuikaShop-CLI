@@ -1,0 +1,1 @@
+{"version":3,"file":"news.js","sources":["../../EdgeDownload/HBuilderX/plugins/uniapp-cli-vite/uniPage:/cGFnZXMvbmV3cy9uZXdzLnZ1ZQ"],"sourcesContent":["import MiniProgramPage from 'D:/extest/IbukiSuikaShop-CLI/pages/news/news.vue'\nwx.createPage(MiniProgramPage)"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;AACA,GAAG,WAAW,eAAe;"}

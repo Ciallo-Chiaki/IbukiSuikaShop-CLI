@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "分类",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "mod-nav-bar": "../../components/mod-nav-bar/mod-nav-bar"
+  }
+}

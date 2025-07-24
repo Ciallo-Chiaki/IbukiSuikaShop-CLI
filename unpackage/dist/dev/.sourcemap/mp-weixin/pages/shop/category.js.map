@@ -1,0 +1,1 @@
+{"version":3,"file":"category.js","sources":["../../EdgeDownload/HBuilderX/plugins/uniapp-cli-vite/uniPage:/cGFnZXMvc2hvcC9jYXRlZ29yeS52dWU"],"sourcesContent":["import MiniProgramPage from 'D:/extest/IbukiSuikaShop-CLI/pages/shop/category.vue'\nwx.createPage(MiniProgramPage)"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;AACA,GAAG,WAAW,eAAe;"}

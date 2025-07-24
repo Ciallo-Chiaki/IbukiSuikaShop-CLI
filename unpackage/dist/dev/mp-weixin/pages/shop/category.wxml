@@ -1,0 +1,1 @@
+<view><mod-nav-bar wx:if="{{a}}" u-i="4fed40a8-0" bind:__l="__l" u-p="{{a}}"></mod-nav-bar></view>
