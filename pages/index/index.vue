@@ -28,6 +28,35 @@ const handleSearch = () => {
       <view class="block"></view>
     </view>
 
+    <view class="page-content">
+      <view class="banner">
+        <swiper
+          indicator-dots
+          indicator-color="rgba(255, 255, 255, 0.5)"
+          indicator-active-color="rgba(255, 255, 255, 1)"
+          interval="3000"
+          autoplay
+          circular
+          class="swiper"
+        >
+          <swiper-item class="swiper-item">
+            <image
+              class="swiper-image"
+              src="/static/images/tmp_banner1.png"
+              mode="scaleToFill"
+            />
+          </swiper-item>
+
+          <swiper-item class="swiper-item">
+            <image
+              class="swiper-image"
+              src="/static/images/tmp_banner2.jpg"
+              mode="scaleToFill"
+            />
+          </swiper-item>
+        </swiper>
+      </view>
+    </view>
     <view v-for="item in 30">
       {{ item }}. 这是一个示例列表项，您可以在这里添加更多内容。
     </view>
@@ -52,6 +81,41 @@ const handleSearch = () => {
     }
     .block {
       height: 90rpx;
+    }
+  }
+  .page-content {
+    padding: 20rpx 32rpx;
+    width: 100%;
+    position: relative;
+    &::before {
+      content: "";
+      display: block;
+      width: 984rpx;
+      height: 522rpx;
+      border-radius: 50%;
+      background: $uni-color-primary;
+      position: absolute;
+      left: calc(50% - 492rpx);
+      top: -320rpx;
+      z-index: -1;
+    }
+
+    .banner {
+      width: 100%;
+      .swiper {
+        width: 100%;
+        height: 352rpx;
+        &-item {
+          width: 100%;
+          height: 100%;
+          border-radius: 30rpx;
+          overflow: hidden;
+          .swiper-image {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
     }
   }
 }

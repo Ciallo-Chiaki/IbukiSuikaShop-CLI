@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 const utils_system = require("../../utils/system.js");
 if (!Array) {
   const _easycom_mod_nav_bar2 = common_vendor.resolveComponent("mod-nav-bar");
@@ -38,12 +39,14 @@ const _sfc_main = {
           placeholder: "请输入要搜索的产品...",
           modelValue: searchValue.value
         }),
-        f: common_vendor.f(30, (item, k0, i0) => {
+        f: common_assets._imports_0,
+        g: common_assets._imports_1,
+        h: common_vendor.f(30, (item, k0, i0) => {
           return {
             a: common_vendor.t(item)
           };
         }),
-        g: common_vendor.s(_ctx.__cssVars())
+        i: common_vendor.s(_ctx.__cssVars())
       };
     };
   }

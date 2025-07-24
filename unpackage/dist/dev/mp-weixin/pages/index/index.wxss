@@ -39,3 +39,37 @@
 .page-wrap .search-wrap .block.data-v-1cf27b2a {
   height: 90rpx;
 }
+.page-wrap .page-content.data-v-1cf27b2a {
+  padding: 20rpx 32rpx;
+  width: 100%;
+  position: relative;
+}
+.page-wrap .page-content.data-v-1cf27b2a::before {
+  content: "";
+  display: block;
+  width: 984rpx;
+  height: 522rpx;
+  border-radius: 50%;
+  background: #bdaf8d;
+  position: absolute;
+  left: calc(50% - 492rpx);
+  top: -320rpx;
+  z-index: -1;
+}
+.page-wrap .page-content .banner.data-v-1cf27b2a {
+  width: 100%;
+}
+.page-wrap .page-content .banner .swiper.data-v-1cf27b2a {
+  width: 100%;
+  height: 352rpx;
+}
+.page-wrap .page-content .banner .swiper-item.data-v-1cf27b2a {
+  width: 100%;
+  height: 100%;
+  border-radius: 30rpx;
+  overflow: hidden;
+}
+.page-wrap .page-content .banner .swiper-item .swiper-image.data-v-1cf27b2a {
+  width: 100%;
+  height: 100%;
+}
