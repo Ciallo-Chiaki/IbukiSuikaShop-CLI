@@ -3,6 +3,9 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "mod-nav-bar": "../../components/mod-nav-bar/mod-nav-bar",
-    "uni-easyinput": "../../uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput"
+    "uni-easyinput": "../../uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput",
+    "scroll-notice": "../../components/scroll-notice/scroll-notice",
+    "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "card-goods": "../../components/card-goods/card-goods"
   }
 }

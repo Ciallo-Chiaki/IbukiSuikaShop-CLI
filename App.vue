@@ -13,6 +13,7 @@ export default {
 </script>
 
 <style>
+@import url("/static/css/iconfont.css");
 /*每个页面公共css */
 view {
   box-sizing: border-box;

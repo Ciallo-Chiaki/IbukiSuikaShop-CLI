@@ -25,50 +25,47 @@
 /* 文章场景相关 */
 /* 文字省略 */
 /* 1行省略 */
-.mod-nav-bar.data-v-ba908f3c {
-  width: 750rpx;
-}
-.mod-nav-bar .fixed-wrap.data-v-ba908f3c {
-  position: fixed;
-  z-index: 8000;
-  top: 0;
-  left: 0;
+.card-goods-item .pic.data-v-953ea244 {
   width: 100%;
-  background: var(--cb1a5f74);
+  aspect-ratio: 1/1;
 }
-.mod-nav-bar .fixed-wrap .status-bar.data-v-ba908f3c {
+.card-goods-item .pic .img.data-v-953ea244 {
   width: 100%;
-  height: var(--7598c584);
+  height: 100%;
+  border-radius: 16rpx;
 }
-.mod-nav-bar .fixed-wrap .title-bar.data-v-ba908f3c {
+.card-goods-item .info.data-v-953ea244 {
+  padding: 16rpx 0;
+}
+.card-goods-item .info .title.data-v-953ea244 {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bolder;
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical !important;
+}
+.card-goods-item .info .price.data-v-953ea244 {
   display: flex;
-  width: 100%;
-  text-align: center;
-  justify-content: space-between;
-  align-items: center;
-  height: var(--60186a28);
-  color: var(--efd55796);
-  padding: 0 32rpx;
+  gap: 16rpx;
+  align-items: flex-end;
+  padding-top: 10rpx;
+}
+.card-goods-item .info .price .new.data-v-953ea244 {
+  display: flex;
+  align-items: flex-end;
   font-size: 32rpx;
+  font-weight: bolder;
+  color: #ff0f23;
 }
-.mod-nav-bar .fixed-wrap .title-bar .arrow-wrap.data-v-ba908f3c {
-  height: 100%;
-  width: 80rpx;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
+.card-goods-item .info .price .new .unit.data-v-953ea244 {
+  font-size: 24rpx;
 }
-.mod-nav-bar .fixed-wrap .title-bar .text-wrap.data-v-ba908f3c {
-  flex: 1;
-  text-align: var(--62c901aa);
-  font-weight: bold;
-}
-.mod-nav-bar .fixed-wrap .title-bar .menu-wrap.data-v-ba908f3c {
-  height: 100%;
-  width: 80rpx;
-  flex-shrink: 0;
-}
-.mod-nav-bar .block-wrap.data-v-ba908f3c {
-  width: 100%;
-  height: var(--3709e371);
+.card-goods-item .info .price .old.data-v-953ea244 {
+  font-size: 24rpx;
+  color: #bbb;
+  text-decoration: line-through;
 }

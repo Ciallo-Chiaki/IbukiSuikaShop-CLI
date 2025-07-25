@@ -64,6 +64,7 @@ const titleTextAlign = computed(() => {
   width: 750rpx;
   .fixed-wrap {
     position: fixed;
+    z-index: 8000;
     top: 0;
     left: 0;
     width: 100%;

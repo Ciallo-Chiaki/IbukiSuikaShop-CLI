@@ -25,50 +25,48 @@
 /* 文章场景相关 */
 /* 文字省略 */
 /* 1行省略 */
-.mod-nav-bar.data-v-ba908f3c {
-  width: 750rpx;
-}
-.mod-nav-bar .fixed-wrap.data-v-ba908f3c {
-  position: fixed;
-  z-index: 8000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: var(--cb1a5f74);
-}
-.mod-nav-bar .fixed-wrap .status-bar.data-v-ba908f3c {
-  width: 100%;
-  height: var(--7598c584);
-}
-.mod-nav-bar .fixed-wrap .title-bar.data-v-ba908f3c {
+.scroll-notice.data-v-abee4ea6 {
   display: flex;
-  width: 100%;
-  text-align: center;
+  align-items: end;
   justify-content: space-between;
-  align-items: center;
-  height: var(--60186a28);
-  color: var(--efd55796);
-  padding: 0 32rpx;
-  font-size: 32rpx;
+  gap: 20rpx;
 }
-.mod-nav-bar .fixed-wrap .title-bar .arrow-wrap.data-v-ba908f3c {
+.scroll-notice .left-wrap.data-v-abee4ea6 {
+  flex-shrink: 0;
+}
+.scroll-notice .left-wrap .icon.data-v-abee4ea6 {
+  width: 88rpx;
+  height: 40rpx;
+  display: block;
+}
+.scroll-notice .notice-wrap.data-v-abee4ea6 {
+  flex: 1;
+}
+.scroll-notice .notice-wrap .swiper.data-v-abee4ea6 {
+  height: 50rpx;
+  width: 100%;
+  line-height: 50rpx;
+}
+.scroll-notice .notice-wrap .swiper-item.data-v-abee4ea6 {
   height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  font-size: 32rpx;
+  height: 50rpx;
+  color: #333;
+  text-decoration: underline;
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical !important;
+}
+.scroll-notice .right-wrap.data-v-abee4ea6 {
   width: 80rpx;
   flex-shrink: 0;
   display: flex;
-  align-items: center;
-}
-.mod-nav-bar .fixed-wrap .title-bar .text-wrap.data-v-ba908f3c {
-  flex: 1;
-  text-align: var(--62c901aa);
-  font-weight: bold;
-}
-.mod-nav-bar .fixed-wrap .title-bar .menu-wrap.data-v-ba908f3c {
-  height: 100%;
-  width: 80rpx;
-  flex-shrink: 0;
-}
-.mod-nav-bar .block-wrap.data-v-ba908f3c {
-  width: 100%;
-  height: var(--3709e371);
+  align-items: end;
+  justify-content: flex-end;
 }
