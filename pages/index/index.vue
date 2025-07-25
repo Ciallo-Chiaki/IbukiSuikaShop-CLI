@@ -45,20 +45,6 @@ const menuList = ref([
   <view class="page-wrap">
     <mod-nav-bar title="首页" title-color="#ffffff"></mod-nav-bar>
 
-    <view class="search-wrap">
-      <view class="fixed">
-        <uni-easyinput
-          class="uni-mt-5"
-          suffixIcon="search"
-          v-model.trim="searchValue"
-          placeholder="请输入要搜索的产品..."
-          @iconClick="handleSearch"
-          @confirm="handleSearch"
-        ></uni-easyinput>
-      </view>
-      <view class="block"></view>
-    </view>
-
     <view class="page-content">
       <view class="banner">
         <swiper
@@ -143,25 +129,6 @@ const menuList = ref([
 
 <style lang="scss" scoped>
 .page-wrap {
-  .search-wrap {
-    .fixed {
-      background-color: $uni-color-primary;
-      padding: 10rpx 32rpx;
-      position: fixed;
-      width: 100%;
-      height: 90rpx;
-      top: v-bind(headHeight);
-      left: 0;
-      z-index: 1000;
-      :deep(.is-input-border) {
-        border-radius: 50px;
-        border-color: $uni-border-color !important;
-      }
-    }
-    .block {
-      height: 90rpx;
-    }
-  }
   .page-content {
     padding: 20rpx 32rpx;
     width: 100%;
