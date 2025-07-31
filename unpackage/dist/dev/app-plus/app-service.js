@@ -698,7 +698,7 @@ if (uni.restoreGlobal) {
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$8 = {
+  const _sfc_main$b = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -752,7 +752,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -767,7 +767,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-d31e1c47"], ["__file", "D:/extest/IbukiSuikaShop-CLI/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-d31e1c47"], ["__file", "D:/extest/IbukiSuikaShop-CLI/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const SYSTEM_WINDOW_INFO = uni.getWindowInfo();
   const MENU_BUTTON_RECT_INFO = uni.getMenuButtonBoundingClientRect ? uni.getMenuButtonBoundingClientRect() : {};
   const COLOR_THEME_PRIMARY = "#bdaf8d";
@@ -799,7 +799,7 @@ if (uni.restoreGlobal) {
       headHeight: headHeightValue
     };
   };
-  const _sfc_main$7 = {
+  const _sfc_main$a = {
     __name: "mod-nav-bar",
     props: {
       title: {
@@ -850,8 +850,8 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_2);
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_3);
     return vue.openBlock(), vue.createElementBlock("view", { class: "mod-nav-bar" }, [
       vue.createElementVNode("view", { class: "fixed-wrap" }, [
         vue.createElementVNode("view", { class: "status-bar" }),
@@ -881,11 +881,554 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "block-wrap" })
     ]);
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-ba908f3c"], ["__file", "D:/extest/IbukiSuikaShop-CLI/components/mod-nav-bar/mod-nav-bar.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-ba908f3c"], ["__file", "D:/extest/IbukiSuikaShop-CLI/components/mod-nav-bar/mod-nav-bar.vue"]]);
+  function obj2strClass(obj) {
+    let classess = "";
+    for (let key in obj) {
+      const val = obj[key];
+      if (val) {
+        classess += `${key} `;
+      }
+    }
+    return classess;
+  }
+  function obj2strStyle(obj) {
+    let style = "";
+    for (let key in obj) {
+      const val = obj[key];
+      style += `${key}:${val};`;
+    }
+    return style;
+  }
+  const _sfc_main$9 = {
+    name: "uni-easyinput",
+    emits: [
+      "click",
+      "iconClick",
+      "update:modelValue",
+      "input",
+      "focus",
+      "blur",
+      "confirm",
+      "clear",
+      "eyes",
+      "change",
+      "keyboardheightchange"
+    ],
+    model: {
+      prop: "modelValue",
+      event: "update:modelValue"
+    },
+    options: {
+      virtualHost: true
+    },
+    inject: {
+      form: {
+        from: "uniForm",
+        default: null
+      },
+      formItem: {
+        from: "uniFormItem",
+        default: null
+      }
+    },
+    props: {
+      name: String,
+      value: [Number, String],
+      modelValue: [Number, String],
+      type: {
+        type: String,
+        default: "text"
+      },
+      clearable: {
+        type: Boolean,
+        default: true
+      },
+      autoHeight: {
+        type: Boolean,
+        default: false
+      },
+      placeholder: {
+        type: String,
+        default: " "
+      },
+      placeholderStyle: String,
+      focus: {
+        type: Boolean,
+        default: false
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      maxlength: {
+        type: [Number, String],
+        default: 140
+      },
+      confirmType: {
+        type: String,
+        default: "done"
+      },
+      clearSize: {
+        type: [Number, String],
+        default: 24
+      },
+      inputBorder: {
+        type: Boolean,
+        default: true
+      },
+      prefixIcon: {
+        type: String,
+        default: ""
+      },
+      suffixIcon: {
+        type: String,
+        default: ""
+      },
+      trim: {
+        type: [Boolean, String],
+        default: false
+      },
+      cursorSpacing: {
+        type: Number,
+        default: 0
+      },
+      passwordIcon: {
+        type: Boolean,
+        default: true
+      },
+      adjustPosition: {
+        type: Boolean,
+        default: true
+      },
+      primaryColor: {
+        type: String,
+        default: "#2979ff"
+      },
+      styles: {
+        type: Object,
+        default() {
+          return {
+            color: "#333",
+            backgroundColor: "#fff",
+            disableColor: "#F7F6F6",
+            borderColor: "#e5e5e5"
+          };
+        }
+      },
+      errorMessage: {
+        type: [String, Boolean],
+        default: ""
+      }
+    },
+    data() {
+      return {
+        focused: false,
+        val: "",
+        showMsg: "",
+        border: false,
+        isFirstBorder: false,
+        showClearIcon: false,
+        showPassword: false,
+        focusShow: false,
+        localMsg: "",
+        isEnter: false
+        // 用于判断当前是否是使用回车操作
+      };
+    },
+    computed: {
+      // 输入框内是否有值
+      isVal() {
+        const val = this.val;
+        if (val || val === 0) {
+          return true;
+        }
+        return false;
+      },
+      msg() {
+        return this.localMsg || this.errorMessage;
+      },
+      // 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，用户可以传入字符串数值
+      inputMaxlength() {
+        return Number(this.maxlength);
+      },
+      // 处理外层样式的style
+      boxStyle() {
+        return `color:${this.inputBorder && this.msg ? "#e43d33" : this.styles.color};`;
+      },
+      // input 内容的类和样式处理
+      inputContentClass() {
+        return obj2strClass({
+          "is-input-border": this.inputBorder,
+          "is-input-error-border": this.inputBorder && this.msg,
+          "is-textarea": this.type === "textarea",
+          "is-disabled": this.disabled,
+          "is-focused": this.focusShow
+        });
+      },
+      inputContentStyle() {
+        const focusColor = this.focusShow ? this.primaryColor : this.styles.borderColor;
+        const borderColor = this.inputBorder && this.msg ? "#dd524d" : focusColor;
+        return obj2strStyle({
+          "border-color": borderColor || "#e5e5e5",
+          "background-color": this.disabled ? this.styles.disableColor : this.styles.backgroundColor
+        });
+      },
+      // input右侧样式
+      inputStyle() {
+        const paddingRight = this.type === "password" || this.clearable || this.prefixIcon ? "" : "10px";
+        return obj2strStyle({
+          "padding-right": paddingRight,
+          "padding-left": this.prefixIcon ? "" : "10px"
+        });
+      }
+    },
+    watch: {
+      value(newVal) {
+        if (newVal === null) {
+          this.val = "";
+          return;
+        }
+        this.val = newVal;
+      },
+      modelValue(newVal) {
+        if (newVal === null) {
+          this.val = "";
+          return;
+        }
+        this.val = newVal;
+      },
+      focus(newVal) {
+        this.$nextTick(() => {
+          this.focused = this.focus;
+          this.focusShow = this.focus;
+        });
+      }
+    },
+    created() {
+      this.init();
+      if (this.form && this.formItem) {
+        this.$watch("formItem.errMsg", (newVal) => {
+          this.localMsg = newVal;
+        });
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.focused = this.focus;
+        this.focusShow = this.focus;
+      });
+    },
+    methods: {
+      /**
+       * 初始化变量值
+       */
+      init() {
+        if (this.value || this.value === 0) {
+          this.val = this.value;
+        } else if (this.modelValue || this.modelValue === 0 || this.modelValue === "") {
+          this.val = this.modelValue;
+        } else {
+          this.val = "";
+        }
+      },
+      /**
+       * 点击图标时触发
+       * @param {Object} type
+       */
+      onClickIcon(type) {
+        this.$emit("iconClick", type);
+      },
+      /**
+       * 显示隐藏内容，密码框时生效
+       */
+      onEyes() {
+        this.showPassword = !this.showPassword;
+        this.$emit("eyes", this.showPassword);
+      },
+      /**
+       * 输入时触发
+       * @param {Object} event
+       */
+      onInput(event) {
+        let value = event.detail.value;
+        if (this.trim) {
+          if (typeof this.trim === "boolean" && this.trim) {
+            value = this.trimStr(value);
+          }
+          if (typeof this.trim === "string") {
+            value = this.trimStr(value, this.trim);
+          }
+        }
+        if (this.errMsg)
+          this.errMsg = "";
+        this.val = value;
+        this.$emit("input", value);
+        this.$emit("update:modelValue", value);
+      },
+      /**
+       * 外部调用方法
+       * 获取焦点时触发
+       * @param {Object} event
+       */
+      onFocus() {
+        this.$nextTick(() => {
+          this.focused = true;
+        });
+        this.$emit("focus", null);
+      },
+      _Focus(event) {
+        this.focusShow = true;
+        this.$emit("focus", event);
+      },
+      /**
+       * 外部调用方法
+       * 失去焦点时触发
+       * @param {Object} event
+       */
+      onBlur() {
+        this.focused = false;
+        this.$emit("blur", null);
+      },
+      _Blur(event) {
+        event.detail.value;
+        this.focusShow = false;
+        this.$emit("blur", event);
+        if (this.isEnter === false) {
+          this.$emit("change", this.val);
+        }
+        if (this.form && this.formItem) {
+          const { validateTrigger } = this.form;
+          if (validateTrigger === "blur") {
+            this.formItem.onFieldChange();
+          }
+        }
+      },
+      /**
+       * 按下键盘的发送键
+       * @param {Object} e
+       */
+      onConfirm(e) {
+        this.$emit("confirm", this.val);
+        this.isEnter = true;
+        this.$emit("change", this.val);
+        this.$nextTick(() => {
+          this.isEnter = false;
+        });
+      },
+      /**
+       * 清理内容
+       * @param {Object} event
+       */
+      onClear(event) {
+        this.val = "";
+        this.$emit("input", "");
+        this.$emit("update:modelValue", "");
+        this.$emit("clear");
+      },
+      /**
+       * 键盘高度发生变化的时候触发此事件
+       * 兼容性：微信小程序2.7.0+、App 3.1.0+
+       * @param {Object} event
+       */
+      onkeyboardheightchange(event) {
+        this.$emit("keyboardheightchange", event);
+      },
+      /**
+       * 去除空格
+       */
+      trimStr(str, pos = "both") {
+        if (pos === "both") {
+          return str.trim();
+        } else if (pos === "left") {
+          return str.trimLeft();
+        } else if (pos === "right") {
+          return str.trimRight();
+        } else if (pos === "start") {
+          return str.trimStart();
+        } else if (pos === "end") {
+          return str.trimEnd();
+        } else if (pos === "all") {
+          return str.replace(/\s+/g, "");
+        } else if (pos === "none") {
+          return str;
+        }
+        return str;
+      }
+    }
+  };
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_3);
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(["uni-easyinput", { "uni-easyinput-error": $options.msg }]),
+        style: vue.normalizeStyle($options.boxStyle)
+      },
+      [
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass(["uni-easyinput__content", $options.inputContentClass]),
+            style: vue.normalizeStyle($options.inputContentStyle)
+          },
+          [
+            $props.prefixIcon ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+              key: 0,
+              class: "content-clear-icon",
+              type: $props.prefixIcon,
+              color: "#c0c4cc",
+              onClick: _cache[0] || (_cache[0] = ($event) => $options.onClickIcon("prefix")),
+              size: "22"
+            }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true),
+            vue.renderSlot(_ctx.$slots, "left", {}, void 0, true),
+            $props.type === "textarea" ? (vue.openBlock(), vue.createElementBlock("textarea", {
+              key: 1,
+              class: vue.normalizeClass(["uni-easyinput__content-textarea", { "input-padding": $props.inputBorder }]),
+              name: $props.name,
+              value: $data.val,
+              placeholder: $props.placeholder,
+              placeholderStyle: $props.placeholderStyle,
+              disabled: $props.disabled,
+              "placeholder-class": "uni-easyinput__placeholder-class",
+              maxlength: $options.inputMaxlength,
+              focus: $data.focused,
+              autoHeight: $props.autoHeight,
+              "cursor-spacing": $props.cursorSpacing,
+              "adjust-position": $props.adjustPosition,
+              onInput: _cache[1] || (_cache[1] = (...args) => $options.onInput && $options.onInput(...args)),
+              onBlur: _cache[2] || (_cache[2] = (...args) => $options._Blur && $options._Blur(...args)),
+              onFocus: _cache[3] || (_cache[3] = (...args) => $options._Focus && $options._Focus(...args)),
+              onConfirm: _cache[4] || (_cache[4] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
+              onKeyboardheightchange: _cache[5] || (_cache[5] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
+            }, null, 42, ["name", "value", "placeholder", "placeholderStyle", "disabled", "maxlength", "focus", "autoHeight", "cursor-spacing", "adjust-position"])) : (vue.openBlock(), vue.createElementBlock("input", {
+              key: 2,
+              type: $props.type === "password" ? "text" : $props.type,
+              class: "uni-easyinput__content-input",
+              style: vue.normalizeStyle($options.inputStyle),
+              name: $props.name,
+              value: $data.val,
+              password: !$data.showPassword && $props.type === "password",
+              placeholder: $props.placeholder,
+              placeholderStyle: $props.placeholderStyle,
+              "placeholder-class": "uni-easyinput__placeholder-class",
+              disabled: $props.disabled,
+              maxlength: $options.inputMaxlength,
+              focus: $data.focused,
+              confirmType: $props.confirmType,
+              "cursor-spacing": $props.cursorSpacing,
+              "adjust-position": $props.adjustPosition,
+              onFocus: _cache[6] || (_cache[6] = (...args) => $options._Focus && $options._Focus(...args)),
+              onBlur: _cache[7] || (_cache[7] = (...args) => $options._Blur && $options._Blur(...args)),
+              onInput: _cache[8] || (_cache[8] = (...args) => $options.onInput && $options.onInput(...args)),
+              onConfirm: _cache[9] || (_cache[9] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
+              onKeyboardheightchange: _cache[10] || (_cache[10] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
+            }, null, 44, ["type", "name", "value", "password", "placeholder", "placeholderStyle", "disabled", "maxlength", "focus", "confirmType", "cursor-spacing", "adjust-position"])),
+            $props.type === "password" && $props.passwordIcon ? (vue.openBlock(), vue.createElementBlock(
+              vue.Fragment,
+              { key: 3 },
+              [
+                vue.createCommentVNode(" 开启密码时显示小眼睛 "),
+                $options.isVal ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+                  key: 0,
+                  class: vue.normalizeClass(["content-clear-icon", { "is-textarea-icon": $props.type === "textarea" }]),
+                  type: $data.showPassword ? "eye-slash-filled" : "eye-filled",
+                  size: 22,
+                  color: $data.focusShow ? $props.primaryColor : "#c0c4cc",
+                  onClick: $options.onEyes
+                }, null, 8, ["class", "type", "color", "onClick"])) : vue.createCommentVNode("v-if", true)
+              ],
+              64
+              /* STABLE_FRAGMENT */
+            )) : vue.createCommentVNode("v-if", true),
+            $props.suffixIcon ? (vue.openBlock(), vue.createElementBlock(
+              vue.Fragment,
+              { key: 4 },
+              [
+                $props.suffixIcon ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+                  key: 0,
+                  class: "content-clear-icon",
+                  type: $props.suffixIcon,
+                  color: "#c0c4cc",
+                  onClick: _cache[11] || (_cache[11] = ($event) => $options.onClickIcon("suffix")),
+                  size: "22"
+                }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true)
+              ],
+              64
+              /* STABLE_FRAGMENT */
+            )) : (vue.openBlock(), vue.createElementBlock(
+              vue.Fragment,
+              { key: 5 },
+              [
+                $props.clearable && $options.isVal && !$props.disabled && $props.type !== "textarea" ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+                  key: 0,
+                  class: vue.normalizeClass(["content-clear-icon", { "is-textarea-icon": $props.type === "textarea" }]),
+                  type: "clear",
+                  size: $props.clearSize,
+                  color: $options.msg ? "#dd524d" : $data.focusShow ? $props.primaryColor : "#c0c4cc",
+                  onClick: $options.onClear
+                }, null, 8, ["class", "size", "color", "onClick"])) : vue.createCommentVNode("v-if", true)
+              ],
+              64
+              /* STABLE_FRAGMENT */
+            )),
+            vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
+          ],
+          6
+          /* CLASS, STYLE */
+        )
+      ],
+      6
+      /* CLASS, STYLE */
+    );
+  }
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-09fd5285"], ["__file", "D:/extest/IbukiSuikaShop-CLI/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const _sfc_main$8 = /* @__PURE__ */ Object.assign({
+    options: {
+      styleIsolation: "shared"
+    }
+  }, {
+    __name: "mode-search",
+    setup(__props, { expose: __expose }) {
+      __expose();
+      vue.useCssVars((_ctx) => ({
+        "973b0e49-headHeight": vue.unref(headHeight)
+      }));
+      const { headHeight } = useNavBarStyle();
+      const searchValue = vue.ref("");
+      const handleSearch = () => {
+        formatAppLog("log", "at components/mode-search/mode-search.vue:15", "搜索内容:", searchValue.value);
+      };
+      const __returned__ = { headHeight, searchValue, handleSearch, ref: vue.ref, get useNavBarStyle() {
+        return useNavBarStyle;
+      } };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "search-wrap" }, [
+      vue.createElementVNode("view", { class: "fixed" }, [
+        vue.createVNode(_component_uni_easyinput, {
+          class: "uni-mt-5",
+          suffixIcon: "search",
+          modelValue: $setup.searchValue,
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.searchValue = $event),
+          modelModifiers: { trim: true },
+          placeholder: "请输入要搜索的产品...",
+          onIconClick: $setup.handleSearch,
+          onConfirm: $setup.handleSearch
+        }, null, 8, ["modelValue"])
+      ]),
+      vue.createElementVNode("view", { class: "block" })
+    ]);
+  }
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-973b0e49"], ["__file", "D:/extest/IbukiSuikaShop-CLI/components/mode-search/mode-search.vue"]]);
   const _imports_0$2 = "/static/images/notic_prefix.png";
-  const _sfc_main$6 = {};
-  function _sfc_render$5(_ctx, _cache) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_2);
+  const _sfc_main$7 = {};
+  function _sfc_render$6(_ctx, _cache) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_3);
     return vue.openBlock(), vue.createElementBlock("view", { class: "scroll-notice" }, [
       vue.createElementVNode("view", { class: "left-wrap" }, [
         vue.createElementVNode("image", {
@@ -916,7 +1459,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-abee4ea6"], ["__file", "D:/extest/IbukiSuikaShop-CLI/components/scroll-notice/scroll-notice.vue"]]);
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-abee4ea6"], ["__file", "D:/extest/IbukiSuikaShop-CLI/components/scroll-notice/scroll-notice.vue"]]);
   var setupDefaults$a = {
     keyId: 1,
     cookies: {
@@ -4764,7 +5307,7 @@ if (uni.restoreGlobal) {
     return xeUtils.commafy(Number(price) / 100, { digits });
   };
   const _imports_0$1 = "/static/images/tmp_goods.jpg";
-  const _sfc_main$5 = {
+  const _sfc_main$6 = {
     __name: "card-goods",
     setup(__props, { expose: __expose }) {
       __expose();
@@ -4775,7 +5318,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "card-goods-item" }, [
       vue.createElementVNode("view", { class: "pic" }, [
         vue.createElementVNode("image", {
@@ -4808,19 +5351,15 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-953ea244"], ["__file", "D:/extest/IbukiSuikaShop-CLI/components/card-goods/card-goods.vue"]]);
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-953ea244"], ["__file", "D:/extest/IbukiSuikaShop-CLI/components/card-goods/card-goods.vue"]]);
   const _imports_0 = "/static/images/tmp_banner1.png";
   const _imports_1 = "/static/images/tmp_banner2.jpg";
   const _imports_2 = "/static/images/home_xydcj.png";
-  const _sfc_main$4 = {
+  const _sfc_main$5 = {
     __name: "index",
     setup(__props, { expose: __expose }) {
       __expose();
       const { headHeight } = useNavBarStyle();
-      const searchValue = vue.ref("");
-      const handleSearch = () => {
-        formatAppLog("log", "at pages/index/index.vue:9", "搜索内容:", searchValue.value);
-      };
       const menuList = vue.ref([
         {
           label: "我的积分",
@@ -4851,23 +5390,25 @@ if (uni.restoreGlobal) {
           bg2: "#99F6E4"
         }
       ]);
-      const __returned__ = { headHeight, searchValue, handleSearch, menuList, ref: vue.ref, get useNavBarStyle() {
+      const __returned__ = { headHeight, menuList, ref: vue.ref, get useNavBarStyle() {
         return useNavBarStyle;
       } };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_mod_nav_bar = resolveEasycom(vue.resolveDynamicComponent("mod-nav-bar"), __easycom_0);
-    const _component_scroll_notice = resolveEasycom(vue.resolveDynamicComponent("scroll-notice"), __easycom_1);
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_2);
-    const _component_card_goods = resolveEasycom(vue.resolveDynamicComponent("card-goods"), __easycom_3);
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_mod_nav_bar = resolveEasycom(vue.resolveDynamicComponent("mod-nav-bar"), __easycom_0$1);
+    const _component_mode_search = resolveEasycom(vue.resolveDynamicComponent("mode-search"), __easycom_1);
+    const _component_scroll_notice = resolveEasycom(vue.resolveDynamicComponent("scroll-notice"), __easycom_2$1);
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_3);
+    const _component_card_goods = resolveEasycom(vue.resolveDynamicComponent("card-goods"), __easycom_4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_mod_nav_bar, {
         title: "首页",
         "title-color": "#ffffff"
       }),
+      vue.createVNode(_component_mode_search),
       vue.createElementVNode("view", { class: "page-content" }, [
         vue.createElementVNode("view", { class: "banner" }, [
           vue.createElementVNode("swiper", {
@@ -4994,10 +5535,10 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-1cf27b2a"], ["__file", "D:/extest/IbukiSuikaShop-CLI/pages/index/index.vue"]]);
-  const _sfc_main$3 = {};
-  function _sfc_render$2(_ctx, _cache) {
-    const _component_mod_nav_bar = resolveEasycom(vue.resolveDynamicComponent("mod-nav-bar"), __easycom_0);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-1cf27b2a"], ["__file", "D:/extest/IbukiSuikaShop-CLI/pages/index/index.vue"]]);
+  const _sfc_main$4 = {};
+  function _sfc_render$3(_ctx, _cache) {
+    const _component_mod_nav_bar = resolveEasycom(vue.resolveDynamicComponent("mod-nav-bar"), __easycom_0$1);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_mod_nav_bar, {
         title: "资讯",
@@ -5005,10 +5546,10 @@ if (uni.restoreGlobal) {
       })
     ]);
   }
-  const PagesNewsNews = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "D:/extest/IbukiSuikaShop-CLI/pages/news/news.vue"]]);
-  const _sfc_main$2 = {};
-  function _sfc_render$1(_ctx, _cache) {
-    const _component_mod_nav_bar = resolveEasycom(vue.resolveDynamicComponent("mod-nav-bar"), __easycom_0);
+  const PagesNewsNews = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "D:/extest/IbukiSuikaShop-CLI/pages/news/news.vue"]]);
+  const _sfc_main$3 = {};
+  function _sfc_render$2(_ctx, _cache) {
+    const _component_mod_nav_bar = resolveEasycom(vue.resolveDynamicComponent("mod-nav-bar"), __easycom_0$1);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_mod_nav_bar, {
         title: "我的",
@@ -5016,18 +5557,100 @@ if (uni.restoreGlobal) {
       })
     ]);
   }
-  const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "D:/extest/IbukiSuikaShop-CLI/pages/my/my.vue"]]);
-  const _sfc_main$1 = {};
-  function _sfc_render(_ctx, _cache) {
-    const _component_mod_nav_bar = resolveEasycom(vue.resolveDynamicComponent("mod-nav-bar"), __easycom_0);
-    return vue.openBlock(), vue.createElementBlock("view", null, [
+  const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "D:/extest/IbukiSuikaShop-CLI/pages/my/my.vue"]]);
+  const _sfc_main$2 = {};
+  function _sfc_render$1(_ctx, _cache) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "card-goods-item" });
+  }
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__scopeId", "data-v-ba01e190"], ["__file", "D:/extest/IbukiSuikaShop-CLI/components/card-goods-info/card-goods-info.vue"]]);
+  const _sfc_main$1 = {
+    __name: "category",
+    setup(__props, { expose: __expose }) {
+      __expose();
+      const __returned__ = {};
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  };
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_mod_nav_bar = resolveEasycom(vue.resolveDynamicComponent("mod-nav-bar"), __easycom_0$1);
+    const _component_mode_search = resolveEasycom(vue.resolveDynamicComponent("mode-search"), __easycom_1);
+    const _component_card_goods_info = resolveEasycom(vue.resolveDynamicComponent("card-goods-info"), __easycom_2);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_mod_nav_bar, {
         title: "商品分类",
         "title-color": "#ffffff"
-      })
+      }),
+      vue.createVNode(_component_mode_search),
+      vue.createElementVNode("view", { class: "container" }, [
+        vue.createElementVNode("scroll-view", {
+          class: "aside",
+          "scroll-y": ""
+        }, [
+          (vue.openBlock(), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList(5, (item, index) => {
+              return vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass(["item", { active: index == 2 }]),
+                  key: index
+                },
+                "分类名称",
+                2
+                /* CLASS */
+              );
+            }),
+            64
+            /* STABLE_FRAGMENT */
+          ))
+        ]),
+        vue.createElementVNode("scroll-view", {
+          class: "main",
+          "scroll-y": ""
+        }, [
+          (vue.openBlock(), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList(5, (group, index) => {
+              return vue.createElementVNode("view", {
+                class: "group",
+                key: index
+              }, [
+                vue.createElementVNode(
+                  "view",
+                  { class: "name" },
+                  "白酒" + vue.toDisplayString(index + 1),
+                  1
+                  /* TEXT */
+                ),
+                vue.createElementVNode("view", { class: "list" }, [
+                  (vue.openBlock(), vue.createElementBlock(
+                    vue.Fragment,
+                    null,
+                    vue.renderList(3, (goods, index2) => {
+                      return vue.createElementVNode("view", {
+                        class: "item",
+                        key: index2
+                      }, [
+                        vue.createVNode(_component_card_goods_info)
+                      ]);
+                    }),
+                    64
+                    /* STABLE_FRAGMENT */
+                  ))
+                ])
+              ]);
+            }),
+            64
+            /* STABLE_FRAGMENT */
+          ))
+        ])
+      ])
     ]);
   }
-  const PagesShopCategory = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "D:/extest/IbukiSuikaShop-CLI/pages/shop/category.vue"]]);
+  const PagesShopCategory = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__scopeId", "data-v-cb6343c4"], ["__file", "D:/extest/IbukiSuikaShop-CLI/pages/shop/category.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/news/news", PagesNewsNews);
   __definePage("pages/my/my", PagesMyMy);

@@ -1,8 +1,15 @@
 {
-  "hash": "5cf1507e",
+  "hash": "d317de7d",
   "configHash": "0fe526f3",
-  "lockfileHash": "e3b0c442",
-  "browserHash": "57c0ec11",
-  "optimized": {},
+  "lockfileHash": "37cab00d",
+  "browserHash": "d7ce148f",
+  "optimized": {
+    "xe-utils": {
+      "src": "../../../../../node_modules/xe-utils/index.js",
+      "file": "xe-utils.js",
+      "fileHash": "1a6208d2",
+      "needsInterop": true
+    }
+  },
   "chunks": {}
 }

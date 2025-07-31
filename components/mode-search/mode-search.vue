@@ -1,4 +1,20 @@
-<script setup></script>
+<script setup>
+defineOptions({
+  options: {
+    styleIsolation: "shared",
+  },
+});
+
+import { ref } from "vue";
+import { useNavBarStyle } from "@/utils/system.js";
+
+const { headHeight } = useNavBarStyle();
+
+const searchValue = ref("");
+const handleSearch = () => {
+  console.log("搜索内容:", searchValue.value);
+};
+</script>
 
 <template>
   <view class="search-wrap">

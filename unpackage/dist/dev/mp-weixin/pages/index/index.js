@@ -4,23 +4,24 @@ const common_assets = require("../../common/assets.js");
 const utils_system = require("../../utils/system.js");
 if (!Array) {
   const _easycom_mod_nav_bar2 = common_vendor.resolveComponent("mod-nav-bar");
+  const _easycom_mode_search2 = common_vendor.resolveComponent("mode-search");
   const _easycom_scroll_notice2 = common_vendor.resolveComponent("scroll-notice");
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   const _easycom_card_goods2 = common_vendor.resolveComponent("card-goods");
-  (_easycom_mod_nav_bar2 + _easycom_scroll_notice2 + _easycom_uni_icons2 + _easycom_card_goods2)();
+  (_easycom_mod_nav_bar2 + _easycom_mode_search2 + _easycom_scroll_notice2 + _easycom_uni_icons2 + _easycom_card_goods2)();
 }
 const _easycom_mod_nav_bar = () => "../../components/mod-nav-bar/mod-nav-bar.js";
+const _easycom_mode_search = () => "../../components/mode-search/mode-search.js";
 const _easycom_scroll_notice = () => "../../components/scroll-notice/scroll-notice.js";
 const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_card_goods = () => "../../components/card-goods/card-goods.js";
 if (!Math) {
-  (_easycom_mod_nav_bar + _easycom_scroll_notice + _easycom_uni_icons + _easycom_card_goods)();
+  (_easycom_mod_nav_bar + _easycom_mode_search + _easycom_scroll_notice + _easycom_uni_icons + _easycom_card_goods)();
 }
 const _sfc_main = {
   __name: "index",
   setup(__props) {
     utils_system.useNavBarStyle();
-    common_vendor.ref("");
     const menuList = common_vendor.ref([
       {
         label: "我的积分",
@@ -76,7 +77,7 @@ const _sfc_main = {
         }),
         g: common_vendor.f(10, (item, k0, i0) => {
           return {
-            a: "1cf27b2a-3-" + i0,
+            a: "1cf27b2a-4-" + i0,
             b: item
           };
         })

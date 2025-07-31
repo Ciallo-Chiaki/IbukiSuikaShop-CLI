@@ -2,6 +2,8 @@
   "navigationBarTitleText": "分类",
   "navigationStyle": "custom",
   "usingComponents": {
-    "mod-nav-bar": "../../components/mod-nav-bar/mod-nav-bar"
+    "mod-nav-bar": "../../components/mod-nav-bar/mod-nav-bar",
+    "mode-search": "../../components/mode-search/mode-search",
+    "card-goods-info": "../../components/card-goods-info/card-goods-info"
   }
 }

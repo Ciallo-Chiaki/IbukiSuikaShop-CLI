@@ -88,6 +88,10 @@ const looseToNumber = (val) => {
   const n2 = parseFloat(val);
   return isNaN(n2) ? val : n2;
 };
+const toNumber$8 = (val) => {
+  const n2 = isString$a(val) ? Number(val) : NaN;
+  return isNaN(n2) ? val : n2;
+};
 function normalizeStyle(value) {
   if (isArray$t(value)) {
     const res = {};
@@ -5233,6 +5237,27 @@ function vFor(source, renderItem) {
   }
   return ret;
 }
+function withModelModifiers(fn, { number, trim: trim2 }, isComponent = false) {
+  if (isComponent) {
+    return (...args) => {
+      if (trim2) {
+        args = args.map((a) => a.trim());
+      } else if (number) {
+        args = args.map(toNumber$8);
+      }
+      return fn(...args);
+    };
+  }
+  return (event) => {
+    const value = event.detail.value;
+    if (trim2) {
+      event.detail.value = value.trim();
+    } else if (number) {
+      event.detail.value = toNumber$8(value);
+    }
+    return fn(event);
+  };
+}
 const o = (value, key) => vOn(value, key);
 const f = (source, renderItem) => vFor(source, renderItem);
 const s = (value) => stringifyStyle(value);
@@ -5240,6 +5265,7 @@ const e = (target, ...sources) => extend(target, ...sources);
 const n = (value) => normalizeClass(value);
 const t = (val) => toDisplayString(val);
 const p = (props) => renderProps(props);
+const m = (fn, modifiers, isComponent = false) => withModelModifiers(fn, modifiers, isComponent);
 function createApp$1(rootComponent, rootProps = null) {
   rootComponent && (rootComponent.mpType = "app");
   return createVueApp(rootComponent, rootProps).use(plugin);
@@ -7061,7 +7087,7 @@ function isConsoleWritable() {
 function initRuntimeSocketService() {
   const hosts = "192.168.5.60,127.0.0.1";
   const port = "8090";
-  const id = "mp-weixin_Bh3Y9E";
+  const id = "mp-weixin_YrMTS4";
   const lazy = typeof swan !== "undefined";
   let restoreError = lazy ? () => {
   } : initOnError();
@@ -11855,6 +11881,7 @@ exports.createSSRApp = createSSRApp;
 exports.e = e;
 exports.f = f;
 exports.index = index;
+exports.m = m;
 exports.n = n;
 exports.o = o;
 exports.p = p;

@@ -4,11 +4,6 @@ import { useNavBarStyle } from "@/utils/system.js";
 
 const { headHeight } = useNavBarStyle();
 
-const searchValue = ref("");
-const handleSearch = () => {
-  console.log("搜索内容:", searchValue.value);
-};
-
 const menuList = ref([
   {
     label: "我的积分",
@@ -44,6 +39,8 @@ const menuList = ref([
 <template>
   <view class="page-wrap">
     <mod-nav-bar title="首页" title-color="#ffffff"></mod-nav-bar>
+
+    <mode-search></mode-search>
 
     <view class="page-content">
       <view class="banner">
