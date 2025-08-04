@@ -26,7 +26,74 @@
 /* 文字省略 */
 /* 1行省略 */
 .card-goods-item.data-v-ba01e190 {
-  height: 200rpx;
+  height: 180rpx;
   width: 100%;
-  background: pink;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14rpx;
+}
+.card-goods-item .card-left.data-v-ba01e190 {
+  flex-shrink: 0;
+  height: 180rpx;
+  aspect-ratio: 1/1;
+  background-color: #eaeaea;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+.card-goods-item .card-left .img.data-v-ba01e190 {
+  width: 100%;
+  height: 100%;
+}
+.card-goods-item .card-right.data-v-ba01e190 {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-goods-item .card-right .top-box.data-v-ba01e190 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-goods-item .card-right .top-box .title.data-v-ba01e190 {
+  font-size: 28rpx;
+  color: #333;
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical !important;
+}
+.card-goods-item .card-right .bottom-box.data-v-ba01e190 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-goods-item .card-right .bottom-box .left.data-v-ba01e190 {
+  display: flex;
+  flex-direction: column;
+}
+.card-goods-item .card-right .bottom-box .left .price-wrap .new.data-v-ba01e190 {
+  font-weight: bolder;
+  font-size: 24rpx;
+  color: #ff0f23;
+}
+.card-goods-item .card-right .bottom-box .left .price-wrap .new .big.data-v-ba01e190 {
+  font-size: 32rpx;
+}
+.card-goods-item .card-right .bottom-box .left .price-wrap .old.data-v-ba01e190 {
+  font-size: 24rpx;
+  color: #999999;
+  -webkit-text-decoration-line: line-through;
+          text-decoration-line: line-through;
+}
+.card-goods-item .card-right .bottom-box .right .buy.data-v-ba01e190 {
+  background-color: #ff5722;
+  color: #ffffff;
+  padding: 10rpx 24rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
 }

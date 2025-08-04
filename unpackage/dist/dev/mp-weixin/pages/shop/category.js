@@ -1,6 +1,8 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-require("../../utils/system.js");
+const utils_config = require("../../utils/config.js");
+const utils_system = require("../../utils/system.js");
+const apis_goods = require("../../apis/goods.js");
 if (!Array) {
   const _easycom_mod_nav_bar2 = common_vendor.resolveComponent("mod-nav-bar");
   const _easycom_mode_search2 = common_vendor.resolveComponent("mode-search");
@@ -16,30 +18,79 @@ if (!Math) {
 const _sfc_main = {
   __name: "category",
   setup(__props) {
+    common_vendor.useCssVars((_ctx) => ({
+      "fcf5eaf4": containerHeight.value
+    }));
+    const currentClassId = common_vendor.ref("");
+    const mainScrollTop = common_vendor.ref(0);
+    const { data: categoryList = [] } = apis_goods.useGoodsCategoryApi();
+    const containerHeight = common_vendor.computed(() => {
+      let tabBarH = 0;
+      return `${utils_config.SYSTEM_WINDOW_INFO.windowHeight - common_vendor.unref(utils_system.navBarH) - 45 - common_vendor.index.rpx2px(100) - tabBarH}px`;
+    });
+    const onClassTab = (item) => {
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:27", "Selected category:", item);
+      currentClassId.value = item._id;
+      mainScrollTop.value = item.top;
+    };
+    const calcSize = () => {
+      let height = 0;
+      categoryList.forEach((item, index) => {
+        const view = common_vendor.index.createSelectorQuery().select(`#module-${item._id}`);
+        view.fields({ size: true }, (data) => {
+          item.top = Math.floor(height);
+          height += data.height;
+        }).exec();
+      });
+      return height;
+    };
+    const onMainScroll = (e) => {
+      let scrollTop = e.detail.scrollTop;
+      let results = categoryList.filter((item) => item.top <= scrollTop).reverse();
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:49", results);
+      if (results.length > 0)
+        currentClassId.value = results[0]._id;
+    };
+    common_vendor.nextTick$1(() => {
+      calcSize();
+      if (categoryList)
+        onClassTab(categoryList[0]);
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:56", categoryList);
+    });
+    common_vendor.index.__f__("log", "at pages/shop/category.vue:58", common_vendor.unref(containerHeight));
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
           title: "商品分类",
           ["title-color"]: "#ffffff"
         }),
-        b: common_vendor.f(5, (item, index, i0) => {
+        b: common_vendor.f(common_vendor.unref(categoryList), (item, index, i0) => {
           return {
-            a: index == 2 ? 1 : "",
-            b: index
+            a: common_vendor.t(item.name),
+            b: item._id == currentClassId.value ? 1 : "",
+            c: item._id,
+            d: common_vendor.o(($event) => onClassTab(item), item._id)
           };
         }),
-        c: common_vendor.f(5, (group, index, i0) => {
+        c: common_vendor.f(common_vendor.unref(categoryList), (group, index, i0) => {
           return {
-            a: common_vendor.t(index + 1),
-            b: common_vendor.f(3, (goods, index2, i1) => {
+            a: common_vendor.t(group.name),
+            b: common_vendor.f(group.goods, (goods, index2, i1) => {
               return {
                 a: "cb6343c4-2-" + i0 + "-" + i1,
-                b: index2
+                b: common_vendor.p({
+                  info: goods
+                }),
+                c: goods._id
               };
             }),
-            c: index
+            c: group._id,
+            d: `module-${group._id}`
           };
-        })
+        }),
+        d: mainScrollTop.value,
+        e: common_vendor.o(onMainScroll),
+        f: common_vendor.s(_ctx.__cssVars())
       };
     };
   }

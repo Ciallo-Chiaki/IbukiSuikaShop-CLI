@@ -39,7 +39,7 @@ const handleSearch = () => {
     padding: 10rpx 32rpx;
     position: fixed;
     width: 100%;
-    height: 90rpx;
+    height: 45px;
     top: v-bind(headHeight);
     left: 0;
     z-index: 1000;
@@ -49,7 +49,7 @@ const handleSearch = () => {
     }
   }
   .block {
-    height: 90rpx;
+    height: 45px;
   }
 }
 </style>

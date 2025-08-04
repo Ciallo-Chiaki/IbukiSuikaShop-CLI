@@ -29,5 +29,6 @@ const useNavBarStyle = () => {
     headHeight: headHeightValue
   };
 };
+exports.navBarH = navBarH;
 exports.useNavBarStyle = useNavBarStyle;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/utils/system.js.map

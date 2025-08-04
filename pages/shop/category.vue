@@ -1,8 +1,61 @@
 <script setup>
-import { SYSTEM_WINDOW_INFO } from "@/utils/comfig.js";
+import { computed, unref, ref, nextTick } from "vue";
+import { SYSTEM_WINDOW_INFO } from "@/utils/config.js";
 import { navBarH } from "@/utils/system.js";
+import { useGoodsCategoryApi } from "@/apis/goods.js";
 
-console.log(SYSTEM_WINDOW_INFO);
+const currentClassId = ref("");
+const mainScrollTop = ref(0);
+const { data: categoryList = [] } = useGoodsCategoryApi();
+
+const containerHeight = computed(() => {
+  let tabBarH = 0;
+  // #ifdef H5
+  tabBarH = 50;
+  // #endif
+
+  return `${
+    SYSTEM_WINDOW_INFO.windowHeight -
+    unref(navBarH) -
+    45 -
+    uni.rpx2px(100) -
+    tabBarH
+  }px`;
+});
+
+const onClassTab = (item) => {
+  console.log("Selected category:", item);
+  currentClassId.value = item._id;
+  mainScrollTop.value = item.top;
+};
+
+const calcSize = () => {
+  let height = 0;
+  categoryList.forEach((item, index) => {
+    const view = uni.createSelectorQuery().select(`#module-${item._id}`);
+    view
+      .fields({ size: true }, (data) => {
+        item.top = Math.floor(height);
+        height += data.height;
+      })
+      .exec();
+  });
+  return height;
+};
+
+const onMainScroll = (e) => {
+  let scrollTop = e.detail.scrollTop;
+  let results = categoryList.filter((item) => item.top <= scrollTop).reverse();
+  console.log(results);
+  if (results.length > 0) currentClassId.value = results[0]._id;
+};
+
+nextTick(() => {
+  calcSize();
+  if (categoryList) onClassTab(categoryList[0]);
+  console.log(categoryList);
+});
+console.log(unref(containerHeight));
 </script>
 
 <template>
@@ -13,22 +66,56 @@ console.log(SYSTEM_WINDOW_INFO);
       <scroll-view class="aside" scroll-y>
         <view
           class="item"
-          :class="{ active: index == 2 }"
-          v-for="(item, index) in 5"
-          :key="index"
-          >分类名称</view
+          :class="{ active: item._id == currentClassId }"
+          v-for="(item, index) in categoryList"
+          :key="item._id"
+          @click="onClassTab(item)"
+          >{{ item.name }}</view
         >
       </scroll-view>
-      <scroll-view class="main" scroll-y>
-        <view class="group" v-for="(group, index) in 5" :key="index">
-          <view class="name">白酒{{ index + 1 }}</view>
+      <scroll-view
+        class="main"
+        scroll-y
+        :scroll-top="mainScrollTop"
+        scroll-with-animation
+        @scroll="onMainScroll"
+      >
+        <view
+          class="group"
+          v-for="(group, index) in categoryList"
+          :key="group._id"
+          :id="`module-${group._id}`"
+        >
+          <view class="name">{{ group.name }}</view>
           <view class="list">
-            <view class="item" v-for="(goods, index) in 3" :key="index">
-              <card-goods-info></card-goods-info>
+            <view
+              class="item"
+              v-for="(goods, index) in group.goods"
+              :key="goods._id"
+            >
+              <card-goods-info :info="goods"></card-goods-info>
             </view>
           </view>
         </view>
       </scroll-view>
+    </view>
+
+    <view class="shop-bar">
+      <view class="content">
+        <view class="left">
+          <view class="icon-wrap">
+            <view class="iconfont icon-caigou"></view>
+            <view class="tag">33</view>
+          </view>
+          <view class="price-wrap">
+            <text>合计：</text>
+            <text class="num">￥888.00</text>
+          </view>
+        </view>
+        <view class="right">
+          <view class="settle">去结算</view>
+        </view>
+      </view>
     </view>
   </view>
 </template>
@@ -38,13 +125,14 @@ console.log(SYSTEM_WINDOW_INFO);
   .container {
     display: flex;
     justify-content: space-between;
-    height: 100vh;
-    border: 1px solid red;
+    height: v-bind(containerHeight);
+
     .aside {
       width: 200rpx;
       height: 100%;
       background: #f9f9f9;
       flex-shrink: 0;
+
       .item {
         display: flex;
         align-items: center;
@@ -54,9 +142,11 @@ console.log(SYSTEM_WINDOW_INFO);
         font-size: 28rpx;
         color: #666;
         position: relative;
+
         &.active {
           color: $uni-color-primary;
-          background-color: #fff;
+          background: #fff;
+
           &::after {
             content: "";
             display: block;
@@ -72,26 +162,135 @@ console.log(SYSTEM_WINDOW_INFO);
         }
       }
     }
+
     .main {
       flex: 1;
       height: 100%;
+
       .group {
         .name {
-          font-size: 28rpx;
+          font-size: 26rpx;
           color: #333;
           padding: 10rpx 24rpx;
           position: sticky;
           top: 0;
+          left: 0;
           background: #fff;
+          font-weight: bold;
         }
+
         .list {
           padding: 24rpx;
           padding-top: 0;
           display: grid;
-          grid-gap: 24rpx;
+          gap: 24rpx;
         }
       }
     }
+  }
+
+  .shop-bar {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    //#ifdef H5
+    bottom: 50px;
+    //#endif
+    //#ifndef H5
+    bottom: 0;
+
+    //#endif
+    .content {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 100rpx;
+      padding: 0 24rpx;
+      box-sizing: border-box;
+      background-color: #6a6a6a;
+
+      .left {
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        .icon-wrap {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 112rpx;
+          height: 112rpx;
+          border-radius: 50%;
+          background-color: $uni-color-primary;
+          position: absolute;
+          top: -30rpx;
+          left: 24rpx;
+
+          .iconfont {
+            font-size: 50rpx;
+            color: #fff;
+          }
+
+          .tag {
+            position: absolute;
+            right: 0;
+            top: 0rpx;
+            min-width: 40rpx;
+            height: 40rpx;
+            padding: 10rpx;
+            font-size: 22rpx;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $uni-color-error;
+            border-radius: 40rpx;
+          }
+        }
+
+        .price-wrap {
+          display: flex;
+          align-items: center;
+          margin-left: 120rpx;
+          color: #fff;
+          font-size: 22rpx;
+
+          .num {
+            font-size: 36rpx;
+          }
+        }
+      }
+
+      .right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 100%;
+
+        .settle {
+          padding: 0 32rpx;
+          height: 66rpx;
+          line-height: 66rpx;
+          font-size: 32rpx;
+          color: #fff;
+          background-color: $uni-color-error;
+          border-radius: 66rpx;
+        }
+      }
+    }
+  }
+
+  .sku-pop-wrap,
+  .cart-pop-wrap {
+    background: #fff;
+    min-height: 300rpx;
+    padding: 32rpx;
+    /* #ifdef H5 */
+    padding: 32rpx 32rpx 66px;
+    /* #endif */
+    border-radius: 20rpx 20rpx 0 0;
   }
 }
 </style>
