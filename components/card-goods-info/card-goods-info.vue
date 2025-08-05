@@ -6,7 +6,25 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  type: {
+    type: Number,
+    default: 0,
+    /* 
+      0 订单列表处
+      1 商城分类列表处
+      2 商品购物车列表处
+      3 规格选择处
+      4 创建订单处
+      5 订单历史详情
+    */
+  },
 });
+
+const emits = defineEmits(["selectBuy"]);
+
+const selectBuy = () => {
+  emits("selectBuy", { ...props.info });
+};
 </script>
 
 <template>
@@ -32,7 +50,9 @@ const props = defineProps({
           </view>
         </view>
         <view class="right">
-          <view class="buy">选购</view>
+          <view class="buy" @click="selectBuy" v-if="[1].includes(type)"
+            >选购</view
+          >
         </view>
       </view>
     </view>

@@ -2,11 +2,15 @@
 import { computed, unref, ref, nextTick } from "vue";
 import { SYSTEM_WINDOW_INFO } from "@/utils/config.js";
 import { navBarH } from "@/utils/system.js";
-import { useGoodsCategoryApi } from "@/apis/goods.js";
+import { useGoodsCategoryApi, useGoodsDetailApi } from "@/apis/goods.js";
+
+const { data: categoryList = [] } = useGoodsCategoryApi();
+const { data: goodsDetail = {} } = useGoodsDetailApi();
 
 const currentClassId = ref("");
 const mainScrollTop = ref(0);
-const { data: categoryList = [] } = useGoodsCategoryApi();
+const skuPopRef = ref(null);
+const currentGoods = ref({});
 
 const containerHeight = computed(() => {
   let tabBarH = 0;
@@ -48,6 +52,12 @@ const onMainScroll = (e) => {
   let results = categoryList.filter((item) => item.top <= scrollTop).reverse();
   console.log(results);
   if (results.length > 0) currentClassId.value = results[0]._id;
+};
+
+const showSkuPop = (e) => {
+  console.log(e);
+  currentGoods.value = goodsDetail;
+  skuPopRef.value.open();
 };
 
 nextTick(() => {
@@ -93,7 +103,11 @@ console.log(unref(containerHeight));
               v-for="(goods, index) in group.goods"
               :key="goods._id"
             >
-              <card-goods-info :info="goods"></card-goods-info>
+              <card-goods-info
+                :info="goods"
+                :type="1"
+                @select-buy="showSkuPop"
+              ></card-goods-info>
             </view>
           </view>
         </view>
@@ -117,6 +131,12 @@ console.log(unref(containerHeight));
         </view>
       </view>
     </view>
+
+    <uni-popup ref="skuPopRef" type="bottom" :mask="true">
+      <view class="sku-pop-wrap">
+        <shop-sku :info="currentGoods"></shop-sku>
+      </view>
+    </uni-popup>
   </view>
 </template>
 

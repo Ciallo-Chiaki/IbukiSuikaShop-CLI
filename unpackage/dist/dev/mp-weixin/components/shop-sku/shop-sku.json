@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "card-goods-info": "../card-goods-info/card-goods-info"
+  }
+}

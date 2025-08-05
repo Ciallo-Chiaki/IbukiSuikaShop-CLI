@@ -168,5 +168,41 @@ const useGoodsCategoryApi = () => {
     ]
   };
 };
+const useGoodsDetailApi = () => {
+  return {
+    data: {
+      _id: "67b43637f6cd0e960498bbbd",
+      name: "Budweiser原装百威啤酒",
+      sku: [
+        {
+          _id: "p9pygsef78",
+          name: "红罐255ml 12罐",
+          price: 4989,
+          market_price: 5321
+        },
+        {
+          _id: "c1d2e3f4",
+          name: "经典红百450mL 18罐",
+          price: 8585,
+          market_price: null
+        },
+        {
+          _id: "a6s80dfx1",
+          name: "经典红百330mL 24罐",
+          price: 10900,
+          market_price: 11900
+        }
+      ],
+      goods_banner_imgs: [
+        "https://picsum.photos/600/600?random=1",
+        "https://picsum.photos/600/600?random=2",
+        "https://picsum.photos/600/600?random=3",
+        "https://picsum.photos/600/600?random=4"
+      ],
+      goods_desc: "<h2>春日漫步小记</h2><p>春风拂面，柳枝轻摇，漫步在城郊的小路上，感受着大自然的馈赠。远处山峦起伏，近处野花点缀，构成一幅和谐画卷。</p><img src='https://picsum.photos/600/700?random=101' width='650' alt='春日风景'><h3>午后咖啡时光</h3><p>阳光透过玻璃窗洒在木桌上，一杯冒着热气的咖啡散发着醇香。在这个安静的午后，时间仿佛变得缓慢而珍贵。</p><img src='https://picsum.photos/700/500?random=102' width='700' alt='咖啡时光'><p>生活就像一本书，需要我们细细品读。每一个平凡的日子，都可能藏着意想不到的惊喜与感动。</p><img src='https://picsum.photos/800/600?random=103' width='750' alt='生活随笔'>"
+    }
+  };
+};
 exports.useGoodsCategoryApi = useGoodsCategoryApi;
+exports.useGoodsDetailApi = useGoodsDetailApi;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/apis/goods.js.map

@@ -4,6 +4,8 @@
   "usingComponents": {
     "mod-nav-bar": "../../components/mod-nav-bar/mod-nav-bar",
     "mode-search": "../../components/mode-search/mode-search",
-    "card-goods-info": "../../components/card-goods-info/card-goods-info"
+    "card-goods-info": "../../components/card-goods-info/card-goods-info",
+    "shop-sku": "../../components/shop-sku/shop-sku",
+    "uni-popup": "../../uni_modules/uni-popup/components/uni-popup/uni-popup"
   }
 }

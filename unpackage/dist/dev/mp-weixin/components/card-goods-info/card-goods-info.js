@@ -7,9 +7,27 @@ const _sfc_main = {
     info: {
       type: Object,
       default: () => ({})
+    },
+    type: {
+      type: Number,
+      default: 0
+      /* 
+        0 订单列表处
+        1 商城分类列表处
+        2 商品购物车列表处
+        3 规格选择处
+        4 创建订单处
+        5 订单历史详情
+      */
     }
   },
-  setup(__props) {
+  emits: ["selectBuy"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emits = __emit;
+    const selectBuy = () => {
+      emits("selectBuy", { ...props.info });
+    };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: __props.info.goods_banner_img,
@@ -18,6 +36,10 @@ const _sfc_main = {
         d: __props.info.market_price
       }, __props.info.market_price ? {
         e: common_vendor.t(common_vendor.unref(utils_format.formatPrice)(__props.info.market_price))
+      } : {}, {
+        f: [1].includes(__props.type)
+      }, [1].includes(__props.type) ? {
+        g: common_vendor.o(selectBuy)
       } : {});
     };
   }

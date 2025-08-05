@@ -7,13 +7,17 @@ if (!Array) {
   const _easycom_mod_nav_bar2 = common_vendor.resolveComponent("mod-nav-bar");
   const _easycom_mode_search2 = common_vendor.resolveComponent("mode-search");
   const _easycom_card_goods_info2 = common_vendor.resolveComponent("card-goods-info");
-  (_easycom_mod_nav_bar2 + _easycom_mode_search2 + _easycom_card_goods_info2)();
+  const _easycom_shop_sku2 = common_vendor.resolveComponent("shop-sku");
+  const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
+  (_easycom_mod_nav_bar2 + _easycom_mode_search2 + _easycom_card_goods_info2 + _easycom_shop_sku2 + _easycom_uni_popup2)();
 }
 const _easycom_mod_nav_bar = () => "../../components/mod-nav-bar/mod-nav-bar.js";
 const _easycom_mode_search = () => "../../components/mode-search/mode-search.js";
 const _easycom_card_goods_info = () => "../../components/card-goods-info/card-goods-info.js";
+const _easycom_shop_sku = () => "../../components/shop-sku/shop-sku.js";
+const _easycom_uni_popup = () => "../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
 if (!Math) {
-  (_easycom_mod_nav_bar + _easycom_mode_search + _easycom_card_goods_info)();
+  (_easycom_mod_nav_bar + _easycom_mode_search + _easycom_card_goods_info + _easycom_shop_sku + _easycom_uni_popup)();
 }
 const _sfc_main = {
   __name: "category",
@@ -21,15 +25,18 @@ const _sfc_main = {
     common_vendor.useCssVars((_ctx) => ({
       "fcf5eaf4": containerHeight.value
     }));
+    const { data: categoryList = [] } = apis_goods.useGoodsCategoryApi();
+    const { data: goodsDetail = {} } = apis_goods.useGoodsDetailApi();
     const currentClassId = common_vendor.ref("");
     const mainScrollTop = common_vendor.ref(0);
-    const { data: categoryList = [] } = apis_goods.useGoodsCategoryApi();
+    const skuPopRef = common_vendor.ref(null);
+    const currentGoods = common_vendor.ref({});
     const containerHeight = common_vendor.computed(() => {
       let tabBarH = 0;
       return `${utils_config.SYSTEM_WINDOW_INFO.windowHeight - common_vendor.unref(utils_system.navBarH) - 45 - common_vendor.index.rpx2px(100) - tabBarH}px`;
     });
     const onClassTab = (item) => {
-      common_vendor.index.__f__("log", "at pages/shop/category.vue:27", "Selected category:", item);
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:31", "Selected category:", item);
       currentClassId.value = item._id;
       mainScrollTop.value = item.top;
     };
@@ -47,17 +54,22 @@ const _sfc_main = {
     const onMainScroll = (e) => {
       let scrollTop = e.detail.scrollTop;
       let results = categoryList.filter((item) => item.top <= scrollTop).reverse();
-      common_vendor.index.__f__("log", "at pages/shop/category.vue:49", results);
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:53", results);
       if (results.length > 0)
         currentClassId.value = results[0]._id;
+    };
+    const showSkuPop = (e) => {
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:58", e);
+      currentGoods.value = goodsDetail;
+      skuPopRef.value.open();
     };
     common_vendor.nextTick$1(() => {
       calcSize();
       if (categoryList)
         onClassTab(categoryList[0]);
-      common_vendor.index.__f__("log", "at pages/shop/category.vue:56", categoryList);
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:66", categoryList);
     });
-    common_vendor.index.__f__("log", "at pages/shop/category.vue:58", common_vendor.unref(containerHeight));
+    common_vendor.index.__f__("log", "at pages/shop/category.vue:68", common_vendor.unref(containerHeight));
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -77,11 +89,13 @@ const _sfc_main = {
             a: common_vendor.t(group.name),
             b: common_vendor.f(group.goods, (goods, index2, i1) => {
               return {
-                a: "cb6343c4-2-" + i0 + "-" + i1,
-                b: common_vendor.p({
-                  info: goods
+                a: common_vendor.o(showSkuPop, goods._id),
+                b: "cb6343c4-2-" + i0 + "-" + i1,
+                c: common_vendor.p({
+                  info: goods,
+                  type: 1
                 }),
-                c: goods._id
+                d: goods._id
               };
             }),
             c: group._id,
@@ -90,7 +104,17 @@ const _sfc_main = {
         }),
         d: mainScrollTop.value,
         e: common_vendor.o(onMainScroll),
-        f: common_vendor.s(_ctx.__cssVars())
+        f: common_vendor.p({
+          info: currentGoods.value
+        }),
+        g: common_vendor.sr(skuPopRef, "cb6343c4-3", {
+          "k": "skuPopRef"
+        }),
+        h: common_vendor.p({
+          type: "bottom",
+          mask: true
+        }),
+        i: common_vendor.s(_ctx.__cssVars())
       };
     };
   }

@@ -5237,6 +5237,10 @@ function vFor(source, renderItem) {
   }
   return ret;
 }
+function setRef(ref2, id, opts = {}) {
+  const { $templateRefs } = getCurrentInstance();
+  $templateRefs.push({ i: id, r: ref2, k: opts.k, f: opts.f });
+}
 function withModelModifiers(fn, { number, trim: trim2 }, isComponent = false) {
   if (isComponent) {
     return (...args) => {
@@ -5265,6 +5269,7 @@ const e = (target, ...sources) => extend(target, ...sources);
 const n = (value) => normalizeClass(value);
 const t = (val) => toDisplayString(val);
 const p = (props) => renderProps(props);
+const sr = (ref2, id, opts) => setRef(ref2, id, opts);
 const m = (fn, modifiers, isComponent = false) => withModelModifiers(fn, modifiers, isComponent);
 function createApp$1(rootComponent, rootProps = null) {
   rootComponent && (rootComponent.mpType = "app");
@@ -7087,7 +7092,7 @@ function isConsoleWritable() {
 function initRuntimeSocketService() {
   const hosts = "192.168.5.60,127.0.0.1";
   const port = "8090";
-  const id = "mp-weixin_AG5P5b";
+  const id = "mp-weixin_Z67ACM";
   const lazy = typeof swan !== "undefined";
   let restoreError = lazy ? () => {
   } : initOnError();
@@ -11889,6 +11894,7 @@ exports.p = p;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
 exports.s = s;
+exports.sr = sr;
 exports.t = t;
 exports.unref = unref;
 exports.useCssVars = useCssVars;
