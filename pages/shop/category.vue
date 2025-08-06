@@ -11,7 +11,7 @@ const currentClassId = ref("");
 const mainScrollTop = ref(0);
 const skuPopRef = ref(null);
 const currentGoods = ref({});
-
+const currentSkuId = ref("");
 const containerHeight = computed(() => {
   let tabBarH = 0;
   // #ifdef H5
@@ -55,9 +55,14 @@ const onMainScroll = (e) => {
 };
 
 const showSkuPop = (e) => {
-  console.log(e);
+  // console.log(e);
   currentGoods.value = goodsDetail;
+  currentSkuId.value = goodsDetail?.sku?.[0]?._id || "";
   skuPopRef.value.open();
+};
+
+const closeSkuPop = () => {
+  skuPopRef.value.close();
 };
 
 nextTick(() => {
@@ -132,9 +137,14 @@ console.log(unref(containerHeight));
       </view>
     </view>
 
-    <uni-popup ref="skuPopRef" type="bottom" :mask="true">
+    <uni-popup ref="skuPopRef" type="bottom" :mask="true" :safe-area="false">
       <view class="sku-pop-wrap">
-        <shop-sku :info="currentGoods"></shop-sku>
+        <shop-sku
+          :info="currentGoods"
+          :sku-id="currentSkuId"
+          v-model:sku-id="currentSkuId"
+          @close="closeSkuPop"
+        ></shop-sku>
       </view>
     </uni-popup>
   </view>
@@ -218,7 +228,6 @@ console.log(unref(containerHeight));
     //#endif
     //#ifndef H5
     bottom: 0;
-
     //#endif
     .content {
       position: relative;
@@ -307,6 +316,8 @@ console.log(unref(containerHeight));
     background: #fff;
     min-height: 300rpx;
     padding: 32rpx;
+
+    border: 1px solid red;
     /* #ifdef H5 */
     padding: 32rpx 32rpx 66px;
     /* #endif */

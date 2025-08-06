@@ -31,6 +31,7 @@ const _sfc_main = {
     const mainScrollTop = common_vendor.ref(0);
     const skuPopRef = common_vendor.ref(null);
     const currentGoods = common_vendor.ref({});
+    const currentSkuId = common_vendor.ref("");
     const containerHeight = common_vendor.computed(() => {
       let tabBarH = 0;
       return `${utils_config.SYSTEM_WINDOW_INFO.windowHeight - common_vendor.unref(utils_system.navBarH) - 45 - common_vendor.index.rpx2px(100) - tabBarH}px`;
@@ -59,17 +60,21 @@ const _sfc_main = {
         currentClassId.value = results[0]._id;
     };
     const showSkuPop = (e) => {
-      common_vendor.index.__f__("log", "at pages/shop/category.vue:58", e);
+      var _a, _b;
       currentGoods.value = goodsDetail;
+      currentSkuId.value = ((_b = (_a = goodsDetail == null ? void 0 : goodsDetail.sku) == null ? void 0 : _a[0]) == null ? void 0 : _b._id) || "";
       skuPopRef.value.open();
+    };
+    const closeSkuPop = () => {
+      skuPopRef.value.close();
     };
     common_vendor.nextTick$1(() => {
       calcSize();
       if (categoryList)
         onClassTab(categoryList[0]);
-      common_vendor.index.__f__("log", "at pages/shop/category.vue:66", categoryList);
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:71", categoryList);
     });
-    common_vendor.index.__f__("log", "at pages/shop/category.vue:68", common_vendor.unref(containerHeight));
+    common_vendor.index.__f__("log", "at pages/shop/category.vue:73", common_vendor.unref(containerHeight));
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -104,17 +109,22 @@ const _sfc_main = {
         }),
         d: mainScrollTop.value,
         e: common_vendor.o(onMainScroll),
-        f: common_vendor.p({
-          info: currentGoods.value
+        f: common_vendor.o(closeSkuPop),
+        g: common_vendor.o(($event) => currentSkuId.value = $event),
+        h: common_vendor.p({
+          info: currentGoods.value,
+          ["sku-id"]: currentSkuId.value,
+          ["sku-id"]: currentSkuId.value
         }),
-        g: common_vendor.sr(skuPopRef, "cb6343c4-3", {
+        i: common_vendor.sr(skuPopRef, "cb6343c4-3", {
           "k": "skuPopRef"
         }),
-        h: common_vendor.p({
+        j: common_vendor.p({
           type: "bottom",
-          mask: true
+          mask: true,
+          ["safe-area"]: false
         }),
-        i: common_vendor.s(_ctx.__cssVars())
+        k: common_vendor.s(_ctx.__cssVars())
       };
     };
   }

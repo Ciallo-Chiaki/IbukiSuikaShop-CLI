@@ -1,18 +1,66 @@
 <script setup>
-import { ref } from "vue";
+import { ref, unref, computed } from "vue";
+import { useCartStore } from "@/stores/cart.js";
+const cartStore = useCartStore();
+console.log(cartStore.cartList);
 
 const props = defineProps({
   info: {
     type: Object,
     default: () => ({}),
   },
+  skuId: {
+    type: String,
+    default: "",
+  },
 });
+
+console.log(props.skuId);
+const emits = defineEmits(["update:skuId", "close"]);
+const skuList = computed(() => {
+  return props.info.sku || [];
+});
+console.log("skuList:", skuList.value);
+const skuInfo = computed(() => {
+  return skuList.value.find((item) => item._id == props.skuId) || {};
+});
+const countNum = ref(1);
+
+const handleSkuChange = (e) => {
+  console.log("Selected SKU:", e);
+  emits("update:skuId", e._id);
+};
+
+// 采集数据函数
+const createInfo = () => {
+  if (!unref(skuInfo)._id) {
+    throw new Error("缺少规格参数");
+  }
+  return {
+    ...props.info,
+    _skuInfo: unref(skuInfo),
+    _countNum: unref(countNum),
+  };
+};
+
+const handleCart = () => {
+  const shopInfo = createInfo();
+  cartStore.pushGoods(shopInfo);
+  emits("close");
+};
+const handleBuy = () => {
+  emits("close");
+};
 </script>
 
 <template>
   <view class="shop-sku">
     <view class="info-wrap">
-      <card-goods-info :info="props.info" :type="3"></card-goods-info>
+      <card-goods-info
+        :info="props.info"
+        :type="3"
+        :sku="skuInfo"
+      ></card-goods-info>
     </view>
 
     <view class="sku-list-wrap">
@@ -20,22 +68,25 @@ const props = defineProps({
       <view class="sku-list">
         <view
           class="sku-item"
-          :class="{ active: item === 1 }"
-          v-for="item in 3"
-          :key="item"
-          >规格名称</view
+          @click="handleSkuChange(item)"
+          :class="{ active: item._id === skuId }"
+          v-for="item in skuList"
+          :key="item._id"
+          >{{ item.name }}</view
         >
       </view>
     </view>
 
     <view class="set-count-wrap">
       <view class="label">数量</view>
-      <view class="count">步进器</view>
+      <view class="count">
+        <uv-number-box v-model="countNum" :min="1" :max="10"></uv-number-box>
+      </view>
     </view>
 
     <view class="btn-wrap">
-      <view class="btn car-btn">加入购物车</view>
-      <view class="btn buy-btn">立即购买</view>
+      <view class="btn car-btn" @click="handleCart">加入购物车</view>
+      <view class="btn buy-btn" @click="handleBuy">立即购买</view>
     </view>
   </view>
 </template>

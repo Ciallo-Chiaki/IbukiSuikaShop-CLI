@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from "vue";
 import { formatPrice } from "@/utils/format.js";
 
 const props = defineProps({
@@ -18,9 +19,26 @@ const props = defineProps({
       5 订单历史详情
     */
   },
+  sku: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 const emits = defineEmits(["selectBuy"]);
+
+const cardData = computed(() => {
+  const _bannerImg =
+    props.info.goods_banner_img || props.info?.goods_banner_imgs?.[0] || null;
+  const _skuInfo = props.sku._id
+    ? { ...props.sku }
+    : { ...props.info.sku?.[0] };
+  return {
+    _bannerImg: _bannerImg,
+    _skuInfo: _skuInfo,
+    ...props.info,
+  };
+});
 
 const selectBuy = () => {
   emits("selectBuy", { ...props.info });
@@ -30,7 +48,7 @@ const selectBuy = () => {
 <template>
   <view class="card-goods-item">
     <view class="card-left">
-      <image class="img" :src="info.goods_banner_img" mode="aspectFill" />
+      <image class="img" :src="cardData._bannerImg" mode="aspectFill" />
     </view>
     <view class="card-right">
       <view class="top-box">
@@ -42,10 +60,21 @@ const selectBuy = () => {
           <view class="price-wrap">
             <view class="new">
               <text>￥</text>
-              <text class="big">{{ formatPrice(info.price) }}</text>
+              <text class="big">{{
+                formatPrice(info.price || cardData._skuInfo.price)
+              }}</text>
             </view>
-            <view class="old" v-if="info.market_price">
-              <text>￥{{ formatPrice(info.market_price) }}</text>
+            <view
+              class="old"
+              v-if="info.market_price || cardData._skuInfo.market_price"
+            >
+              <text
+                >￥{{
+                  formatPrice(
+                    info.market_price || cardData._skuInfo.market_price,
+                  )
+                }}</text
+              >
             </view>
           </view>
         </view>
