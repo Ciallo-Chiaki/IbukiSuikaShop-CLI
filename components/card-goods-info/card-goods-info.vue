@@ -40,6 +40,10 @@ const cardData = computed(() => {
   };
 });
 
+const numberChange = (e) => {
+  console.log(e);
+};
+
 const selectBuy = () => {
   emits("selectBuy", { ...props.info });
 };
@@ -53,7 +57,11 @@ const selectBuy = () => {
     <view class="card-right">
       <view class="top-box">
         <view class="title">{{ info.name }}</view>
-        <view></view>
+        <view class="sku">
+          <view class="tag" v-if="[2].includes(type)">
+            {{ cardData._skuInfo.name || "默认规格" }}
+          </view>
+        </view>
       </view>
       <view class="bottom-box">
         <view class="left">
@@ -82,6 +90,11 @@ const selectBuy = () => {
           <view class="buy" @click="selectBuy" v-if="[1].includes(type)"
             >选购</view
           >
+          <uv-number-box
+            v-if="[2].includes(type)"
+            :value="cardData._countNum"
+            @change="numberChange"
+          ></uv-number-box>
         </view>
       </view>
     </view>
@@ -90,17 +103,16 @@ const selectBuy = () => {
 
 <style lang="scss" scoped>
 .card-goods-item {
-  height: 180rpx;
   width: 100%;
+  height: 180rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 14rpx;
   .card-left {
     flex-shrink: 0;
-    height: 180rpx;
-    aspect-ratio: 1/1;
-    background-color: #eaeaea;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     border-radius: 6rpx;
     overflow: hidden;
     .img {
@@ -115,47 +127,53 @@ const selectBuy = () => {
     flex-direction: column;
     justify-content: space-between;
     .top-box {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       .title {
         font-size: 28rpx;
-        color: #333;
+        color: #000;
         @include text-ellipsis(2);
+      }
+      .sku {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 10rpx;
+        .tag {
+          padding: 6rpx 10rpx;
+          font-size: 20rpx;
+          color: #333;
+          background-color: #f0f0f0;
+          border-radius: 4rpx;
+        }
       }
     }
     .bottom-box {
       display: flex;
+      align-items: flex-end;
       justify-content: space-between;
-      align-items: center;
       .left {
-        display: flex;
-        flex-direction: column;
         .price-wrap {
-          // display: flex;
-          // align-items: baseline;
+          font-size: 22rpx;
           .new {
             font-weight: bolder;
-            font-size: 24rpx;
             color: $uni-color-error;
             .big {
-              font-size: 32rpx;
+              font-size: 28rpx;
             }
           }
           .old {
-            font-size: 24rpx;
-            color: #999999;
-            text-decoration-line: line-through;
+            font-size: 22rpx;
+            color: #999;
+            text-decoration: line-through;
           }
         }
       }
       .right {
         .buy {
-          background-color: #ff5722;
-          color: #ffffff;
-          padding: 10rpx 24rpx;
-          border-radius: 30rpx;
-          font-size: 28rpx;
+          font-size: 24rpx;
+          background: $uni-color-primary;
+          border-radius: 40rpx;
+          padding: 12rpx 24rpx;
+          color: #fff;
         }
       }
     }

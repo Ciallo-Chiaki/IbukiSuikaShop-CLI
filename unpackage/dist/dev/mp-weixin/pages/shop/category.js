@@ -3,21 +3,24 @@ const common_vendor = require("../../common/vendor.js");
 const utils_config = require("../../utils/config.js");
 const utils_system = require("../../utils/system.js");
 const apis_goods = require("../../apis/goods.js");
+const stores_cart = require("../../stores/cart.js");
 if (!Array) {
   const _easycom_mod_nav_bar2 = common_vendor.resolveComponent("mod-nav-bar");
   const _easycom_mode_search2 = common_vendor.resolveComponent("mode-search");
   const _easycom_card_goods_info2 = common_vendor.resolveComponent("card-goods-info");
   const _easycom_shop_sku2 = common_vendor.resolveComponent("shop-sku");
   const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
-  (_easycom_mod_nav_bar2 + _easycom_mode_search2 + _easycom_card_goods_info2 + _easycom_shop_sku2 + _easycom_uni_popup2)();
+  const _easycom_shop_cart2 = common_vendor.resolveComponent("shop-cart");
+  (_easycom_mod_nav_bar2 + _easycom_mode_search2 + _easycom_card_goods_info2 + _easycom_shop_sku2 + _easycom_uni_popup2 + _easycom_shop_cart2)();
 }
 const _easycom_mod_nav_bar = () => "../../components/mod-nav-bar/mod-nav-bar.js";
 const _easycom_mode_search = () => "../../components/mode-search/mode-search.js";
 const _easycom_card_goods_info = () => "../../components/card-goods-info/card-goods-info.js";
 const _easycom_shop_sku = () => "../../components/shop-sku/shop-sku.js";
 const _easycom_uni_popup = () => "../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
+const _easycom_shop_cart = () => "../../components/shop-cart/shop-cart.js";
 if (!Math) {
-  (_easycom_mod_nav_bar + _easycom_mode_search + _easycom_card_goods_info + _easycom_shop_sku + _easycom_uni_popup)();
+  (_easycom_mod_nav_bar + _easycom_mode_search + _easycom_card_goods_info + _easycom_shop_sku + _easycom_uni_popup + _easycom_shop_cart)();
 }
 const _sfc_main = {
   __name: "category",
@@ -25,11 +28,13 @@ const _sfc_main = {
     common_vendor.useCssVars((_ctx) => ({
       "fcf5eaf4": containerHeight.value
     }));
+    const cartStore = stores_cart.useCartStore();
     const { data: categoryList = [] } = apis_goods.useGoodsCategoryApi();
     const { data: goodsDetail = {} } = apis_goods.useGoodsDetailApi();
     const currentClassId = common_vendor.ref("");
     const mainScrollTop = common_vendor.ref(0);
     const skuPopRef = common_vendor.ref(null);
+    const cartPopRef = common_vendor.ref(null);
     const currentGoods = common_vendor.ref({});
     const currentSkuId = common_vendor.ref("");
     const containerHeight = common_vendor.computed(() => {
@@ -37,7 +42,7 @@ const _sfc_main = {
       return `${utils_config.SYSTEM_WINDOW_INFO.windowHeight - common_vendor.unref(utils_system.navBarH) - 45 - common_vendor.index.rpx2px(100) - tabBarH}px`;
     });
     const onClassTab = (item) => {
-      common_vendor.index.__f__("log", "at pages/shop/category.vue:31", "Selected category:", item);
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:34", "Selected category:", item);
       currentClassId.value = item._id;
       mainScrollTop.value = item.top;
     };
@@ -55,7 +60,7 @@ const _sfc_main = {
     const onMainScroll = (e) => {
       let scrollTop = e.detail.scrollTop;
       let results = categoryList.filter((item) => item.top <= scrollTop).reverse();
-      common_vendor.index.__f__("log", "at pages/shop/category.vue:53", results);
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:56", results);
       if (results.length > 0)
         currentClassId.value = results[0]._id;
     };
@@ -68,13 +73,16 @@ const _sfc_main = {
     const closeSkuPop = () => {
       skuPopRef.value.close();
     };
+    const showCartPop = () => {
+      cartPopRef.value.open();
+    };
     common_vendor.nextTick$1(() => {
       calcSize();
       if (categoryList)
         onClassTab(categoryList[0]);
-      common_vendor.index.__f__("log", "at pages/shop/category.vue:71", categoryList);
+      common_vendor.index.__f__("log", "at pages/shop/category.vue:78", categoryList);
     });
-    common_vendor.index.__f__("log", "at pages/shop/category.vue:73", common_vendor.unref(containerHeight));
+    common_vendor.index.__f__("log", "at pages/shop/category.vue:80", common_vendor.unref(containerHeight));
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -109,22 +117,32 @@ const _sfc_main = {
         }),
         d: mainScrollTop.value,
         e: common_vendor.o(onMainScroll),
-        f: common_vendor.o(closeSkuPop),
-        g: common_vendor.o(($event) => currentSkuId.value = $event),
-        h: common_vendor.p({
+        f: common_vendor.t(common_vendor.unref(cartStore).cartList.length),
+        g: common_vendor.o(showCartPop),
+        h: common_vendor.o(closeSkuPop),
+        i: common_vendor.o(($event) => currentSkuId.value = $event),
+        j: common_vendor.p({
           info: currentGoods.value,
           ["sku-id"]: currentSkuId.value,
           ["sku-id"]: currentSkuId.value
         }),
-        i: common_vendor.sr(skuPopRef, "cb6343c4-3", {
+        k: common_vendor.sr(skuPopRef, "cb6343c4-3", {
           "k": "skuPopRef"
         }),
-        j: common_vendor.p({
+        l: common_vendor.p({
           type: "bottom",
           mask: true,
           ["safe-area"]: false
         }),
-        k: common_vendor.s(_ctx.__cssVars())
+        m: common_vendor.sr(cartPopRef, "cb6343c4-5", {
+          "k": "cartPopRef"
+        }),
+        n: common_vendor.p({
+          type: "bottom",
+          mask: true,
+          ["safe-area"]: false
+        }),
+        o: common_vendor.s(_ctx.__cssVars())
       };
     };
   }

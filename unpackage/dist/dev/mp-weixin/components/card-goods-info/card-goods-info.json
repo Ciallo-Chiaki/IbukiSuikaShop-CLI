@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "uv-number-box": "../../uni_modules/uv-number-box/components/uv-number-box/uv-number-box"
+  }
 }

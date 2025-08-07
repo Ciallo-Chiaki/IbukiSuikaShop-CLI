@@ -166,6 +166,5 @@
   background: #fff;
   min-height: 300rpx;
   padding: 32rpx;
-  border: 1px solid red;
   border-radius: 20rpx 20rpx 0 0;
 }

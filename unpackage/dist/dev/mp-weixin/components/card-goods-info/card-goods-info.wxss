@@ -26,8 +26,8 @@
 /* 文字省略 */
 /* 1行省略 */
 .card-goods-item.data-v-ba01e190 {
-  height: 180rpx;
   width: 100%;
+  height: 180rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,9 +35,8 @@
 }
 .card-goods-item .card-left.data-v-ba01e190 {
   flex-shrink: 0;
-  height: 180rpx;
+  height: 100%;
   aspect-ratio: 1/1;
-  background-color: #eaeaea;
   border-radius: 6rpx;
   overflow: hidden;
 }
@@ -52,14 +51,9 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.card-goods-item .card-right .top-box.data-v-ba01e190 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .card-goods-item .card-right .top-box .title.data-v-ba01e190 {
   font-size: 28rpx;
-  color: #333;
+  color: #000;
   display: -webkit-box !important;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -67,33 +61,43 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical !important;
 }
+.card-goods-item .card-right .top-box .sku.data-v-ba01e190 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10rpx;
+}
+.card-goods-item .card-right .top-box .sku .tag.data-v-ba01e190 {
+  padding: 6rpx 10rpx;
+  font-size: 20rpx;
+  color: #333;
+  background-color: #f0f0f0;
+  border-radius: 4rpx;
+}
 .card-goods-item .card-right .bottom-box.data-v-ba01e190 {
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
-  align-items: center;
 }
-.card-goods-item .card-right .bottom-box .left.data-v-ba01e190 {
-  display: flex;
-  flex-direction: column;
+.card-goods-item .card-right .bottom-box .left .price-wrap.data-v-ba01e190 {
+  font-size: 22rpx;
 }
 .card-goods-item .card-right .bottom-box .left .price-wrap .new.data-v-ba01e190 {
   font-weight: bolder;
-  font-size: 24rpx;
   color: #ff0f23;
 }
 .card-goods-item .card-right .bottom-box .left .price-wrap .new .big.data-v-ba01e190 {
-  font-size: 32rpx;
+  font-size: 28rpx;
 }
 .card-goods-item .card-right .bottom-box .left .price-wrap .old.data-v-ba01e190 {
-  font-size: 24rpx;
-  color: #999999;
-  -webkit-text-decoration-line: line-through;
-          text-decoration-line: line-through;
+  font-size: 22rpx;
+  color: #999;
+  text-decoration: line-through;
 }
 .card-goods-item .card-right .bottom-box .right .buy.data-v-ba01e190 {
-  background-color: #ff5722;
-  color: #ffffff;
-  padding: 10rpx 24rpx;
-  border-radius: 30rpx;
-  font-size: 28rpx;
+  font-size: 24rpx;
+  background: #bdaf8d;
+  border-radius: 40rpx;
+  padding: 12rpx 24rpx;
+  color: #fff;
 }

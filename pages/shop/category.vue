@@ -3,13 +3,16 @@ import { computed, unref, ref, nextTick } from "vue";
 import { SYSTEM_WINDOW_INFO } from "@/utils/config.js";
 import { navBarH } from "@/utils/system.js";
 import { useGoodsCategoryApi, useGoodsDetailApi } from "@/apis/goods.js";
+import { useCartStore } from "@/stores/cart.js";
 
+const cartStore = useCartStore();
 const { data: categoryList = [] } = useGoodsCategoryApi();
 const { data: goodsDetail = {} } = useGoodsDetailApi();
 
 const currentClassId = ref("");
 const mainScrollTop = ref(0);
 const skuPopRef = ref(null);
+const cartPopRef = ref(null);
 const currentGoods = ref({});
 const currentSkuId = ref("");
 const containerHeight = computed(() => {
@@ -63,6 +66,10 @@ const showSkuPop = (e) => {
 
 const closeSkuPop = () => {
   skuPopRef.value.close();
+};
+
+const showCartPop = () => {
+  cartPopRef.value.open();
 };
 
 nextTick(() => {
@@ -122,9 +129,9 @@ console.log(unref(containerHeight));
     <view class="shop-bar">
       <view class="content">
         <view class="left">
-          <view class="icon-wrap">
+          <view class="icon-wrap" @click="showCartPop">
             <view class="iconfont icon-caigou"></view>
-            <view class="tag">33</view>
+            <view class="tag">{{ cartStore.cartList.length }}</view>
           </view>
           <view class="price-wrap">
             <text>合计：</text>
@@ -145,6 +152,12 @@ console.log(unref(containerHeight));
           v-model:sku-id="currentSkuId"
           @close="closeSkuPop"
         ></shop-sku>
+      </view>
+    </uni-popup>
+
+    <uni-popup ref="cartPopRef" type="bottom" :mask="true" :safe-area="false">
+      <view class="cart-pop-wrap">
+        <shop-cart></shop-cart>
       </view>
     </uni-popup>
   </view>
@@ -316,8 +329,6 @@ console.log(unref(containerHeight));
     background: #fff;
     min-height: 300rpx;
     padding: 32rpx;
-
-    border: 1px solid red;
     /* #ifdef H5 */
     padding: 32rpx 32rpx 66px;
     /* #endif */
