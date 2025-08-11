@@ -55,9 +55,11 @@
   font-size: 32rpx;
   background-color: #f4f4f4;
   border-radius: 4rpx;
+  border: 1px solid #eee;
 }
 .shop-sku .sku-list-wrap .sku-list .sku-item.active.data-v-6fb26f9c {
   color: #fff;
+  border: 1px solid #fff;
   background-color: #bdaf8d;
 }
 .shop-sku .set-count-wrap.data-v-6fb26f9c {

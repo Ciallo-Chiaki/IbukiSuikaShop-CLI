@@ -119,8 +119,11 @@ const handleBuy = () => {
         font-size: 32rpx;
         background-color: #f4f4f4;
         border-radius: 4rpx;
+        border: 1px solid #eee;
+
         &.active {
           color: #fff;
+          border: 1px solid #fff;
           background-color: $uni-color-primary;
         }
       }

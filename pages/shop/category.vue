@@ -131,15 +131,17 @@ console.log(unref(containerHeight));
         <view class="left">
           <view class="icon-wrap" @click="showCartPop">
             <view class="iconfont icon-caigou"></view>
-            <view class="tag">{{ cartStore.cartList.length }}</view>
+            <view class="tag" v-if="cartStore.goodsTotal > 0">{{
+              cartStore.goodsTotal
+            }}</view>
           </view>
           <view class="price-wrap">
             <text>合计：</text>
-            <text class="num">￥888.00</text>
+            <text class="num">￥{{ cartStore.priceTotal }}</text>
           </view>
         </view>
         <view class="right">
-          <view class="settle">去结算</view>
+          <view class="settle" v-if="cartStore.goodsTotal > 0">去结算</view>
         </view>
       </view>
     </view>

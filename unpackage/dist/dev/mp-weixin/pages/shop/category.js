@@ -84,7 +84,7 @@ const _sfc_main = {
     });
     common_vendor.index.__f__("log", "at pages/shop/category.vue:80", common_vendor.unref(containerHeight));
     return (_ctx, _cache) => {
-      return {
+      return common_vendor.e({
         a: common_vendor.p({
           title: "商品分类",
           ["title-color"]: "#ffffff"
@@ -117,33 +117,39 @@ const _sfc_main = {
         }),
         d: mainScrollTop.value,
         e: common_vendor.o(onMainScroll),
-        f: common_vendor.t(common_vendor.unref(cartStore).cartList.length),
-        g: common_vendor.o(showCartPop),
-        h: common_vendor.o(closeSkuPop),
-        i: common_vendor.o(($event) => currentSkuId.value = $event),
-        j: common_vendor.p({
+        f: common_vendor.unref(cartStore).goodsTotal > 0
+      }, common_vendor.unref(cartStore).goodsTotal > 0 ? {
+        g: common_vendor.t(common_vendor.unref(cartStore).goodsTotal)
+      } : {}, {
+        h: common_vendor.o(showCartPop),
+        i: common_vendor.t(common_vendor.unref(cartStore).priceTotal),
+        j: common_vendor.unref(cartStore).goodsTotal > 0
+      }, common_vendor.unref(cartStore).goodsTotal > 0 ? {} : {}, {
+        k: common_vendor.o(closeSkuPop),
+        l: common_vendor.o(($event) => currentSkuId.value = $event),
+        m: common_vendor.p({
           info: currentGoods.value,
           ["sku-id"]: currentSkuId.value,
           ["sku-id"]: currentSkuId.value
         }),
-        k: common_vendor.sr(skuPopRef, "cb6343c4-3", {
+        n: common_vendor.sr(skuPopRef, "cb6343c4-3", {
           "k": "skuPopRef"
         }),
-        l: common_vendor.p({
+        o: common_vendor.p({
           type: "bottom",
           mask: true,
           ["safe-area"]: false
         }),
-        m: common_vendor.sr(cartPopRef, "cb6343c4-5", {
+        p: common_vendor.sr(cartPopRef, "cb6343c4-5", {
           "k": "cartPopRef"
         }),
-        n: common_vendor.p({
+        q: common_vendor.p({
           type: "bottom",
           mask: true,
           ["safe-area"]: false
         }),
-        o: common_vendor.s(_ctx.__cssVars())
-      };
+        r: common_vendor.s(_ctx.__cssVars())
+      });
     };
   }
 };

@@ -1,7 +1,23 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
+const utils_format = require("../utils/format.js");
 const cartList = common_vendor.ref([]);
 const useCartStore = common_vendor.defineStore("cart", () => {
+  const goodsTotal = common_vendor.computed(() => {
+    return common_vendor.unref(cartList).reduce((total, item) => {
+      return common_vendor.xeUtils.add(total, Number(item._countNum));
+    }, 0);
+  });
+  const priceTotal = common_vendor.computed(() => {
+    let amount = common_vendor.unref(cartList).reduce((prev, current) => {
+      const result = common_vendor.xeUtils.multiply(
+        Number(current._countNum),
+        Number(current._skuInfo.price)
+      );
+      return common_vendor.xeUtils.add(prev, Number(result));
+    }, 0);
+    return utils_format.formatPrice(amount, { digits: 2 });
+  });
   const pushGoods = (data) => {
     let {
       _id,
@@ -19,7 +35,9 @@ const useCartStore = common_vendor.defineStore("cart", () => {
   };
   return {
     cartList,
-    pushGoods
+    pushGoods,
+    goodsTotal,
+    priceTotal
   };
 });
 exports.useCartStore = useCartStore;
